@@ -111,7 +111,7 @@ if ( (reportContext.getParameterValue("usepagebreaks") == "false")|| reportConte
             </structure>
         </scalar-parameter>
         <scalar-parameter name="dbschema" id="373">
-            <text-property name="promptText">Database schema</text-property>
+            <text-property name="promptText">Database Schema</text-property>
             <property name="valueType">static</property>
             <property name="dataType">string</property>
             <property name="distinct">true</property>
@@ -1589,7 +1589,7 @@ sql =
   "select objectname, attributename, alias, classname, columnname, domainid, entityname, maxtype "
 + "from maxattribute "
 + "where userdefined=1 "
-+ "order by objectname, attributename ";
++ "order by objectname, attributename";
 
 ds.setQuery(sql);
 ]]></method>
@@ -2038,7 +2038,7 @@ var sql = new String();
 sql =
   "select app, description, originalapp, maintbname "
 + "from maxapps "
-+ "where originalapp is not null "
++ "where originalapp is not null and app not like 'PLUS%'"
 + "order by app";
 
 ds.setQuery(sql);
@@ -2566,7 +2566,7 @@ return (true);
                 <structure>
                     <property name="position">6</property>
                     <property name="name">s_size</property>
-                    <property name="dataType">string</property>
+                    <property name="dataType">integer</property>
                 </structure>
             </list-property>
             <list-property name="columnHints">
@@ -2619,7 +2619,7 @@ return (true);
                     <structure>
                         <property name="position">6</property>
                         <property name="name">s_size</property>
-                        <property name="dataType">string</property>
+                        <property name="dataType">integer</property>
                     </structure>
                 </list-property>
             </structure>
@@ -2651,7 +2651,7 @@ row["lp_name"] = ds.getString("lp_name");
 row["lp_desc"] = ds.getString("lp_desc");	
 row["lp_type"] = ds.getString("lp_type");	
 
-row["s_size"] = (ds.getString("source")).length;	
+row["s_size"] =  BirtStr.charLength(ds.getString("source"));	
 
 
 return (true);
@@ -2790,13 +2790,12 @@ return (true);
                 <cell id="988"/>
             </row>
             <row id="1126">
-                <property name="height">0.1in</property>
                 <cell id="1127">
                     <label id="1128">
                         <property name="fontSize">14pt</property>
                         <property name="fontWeight">bold</property>
                         <property name="color">#006464</property>
-                        <text-property name="text">Version 1.3</text-property>
+                        <text-property name="text">Version 1.4</text-property>
                     </label>
                 </cell>
             </row>
@@ -2818,9 +2817,9 @@ return (true);
                 <property name="height">0.4in</property>
                 <cell id="1309"/>
             </row>
-            <row id="1217">
-                <property name="height">0.4in</property>
-                <cell id="1218">
+            <row id="983">
+                <property name="height">4.6in</property>
+                <cell id="984">
                     <label id="1207">
                         <property name="fontSize">9pt</property>
                         <property name="fontWeight">bold</property>
@@ -2834,10 +2833,6 @@ return (true);
                         <text-property name="text">Please generate this report in PDF format for best results.</text-property>
                     </label>
                 </cell>
-            </row>
-            <row id="983">
-                <property name="height">4.6in</property>
-                <cell id="984"/>
             </row>
             <row id="976">
                 <cell id="977">
@@ -2872,8 +2867,7 @@ return (true);
                     <text id="475">
                         <property name="textAlign">justify</property>
                         <property name="contentType">html</property>
-                        <text-property name="content"><![CDATA[Maximo Configuration Overview report is a utility for IBM Maximo and IBM Control Desk that can help identify and analyze the level of configuration and customization of a Maximo environment.<BR>
-<BR>]]></text-property>
+                        <text-property name="content"><![CDATA[Maximo Configuration Overview report is a utility for IBM Maximo and IBM Control Desk that can help identify and analyze the level of configuration and customization of a Maximo environment.<BR>]]></text-property>
                     </text>
                 </cell>
             </row>
@@ -2949,10 +2943,6 @@ this.content = sdf.format( today );
                                 </text>
                             </cell>
                         </row>
-                        <row id="1021">
-                            <cell id="1022"/>
-                            <cell id="1023"/>
-                        </row>
                     </grid>
                 </cell>
             </row>
@@ -2973,7 +2963,6 @@ this.content = sdf.format( today );
                 <cell id="1204"/>
             </row>
             <row id="1131">
-                <property name="height">0.3in</property>
                 <cell id="1132">
                     <grid id="1135">
                         <column id="1136">
@@ -3280,6 +3269,7 @@ this.content = sdf.format( today );
                 </cell>
             </row>
             <row id="1186">
+                <property name="height">0.2in</property>
                 <cell id="1187"/>
             </row>
         </grid>
@@ -3288,22 +3278,32 @@ this.content = sdf.format( today );
             <property name="height">3.3125in</property>
             <column id="678"/>
             <row id="691">
-                <property name="height">1.0625in</property>
                 <cell id="692">
                     <label id="1381">
                         <property name="style">OmniH1</property>
                         <text-property name="text">Sites Breakdown</text-property>
                     </label>
+                </cell>
+            </row>
+            <row id="2498">
+                <property name="height">0.1in</property>
+                <cell id="2499"/>
+            </row>
+            <row id="2496">
+                <cell id="2497">
                     <text id="714">
                         <property name="textAlign">justify</property>
                         <property name="contentType">html</property>
                         <text-property name="content"><![CDATA[Here we look at how data is split across your organization and sites.<BR>
-This report can help you focus on the largest sites that have greater impact on database performances.<BR>]]></text-property>
+This report can help you focus on the largest sites that have greater impact on database performances.]]></text-property>
                     </text>
                 </cell>
             </row>
+            <row id="2500">
+                <property name="height">0.1in</property>
+                <cell id="2501"/>
+            </row>
             <row id="685">
-                <property name="height">0.8854166666666666in</property>
                 <cell id="686">
                     <table id="492">
                         <property name="width">100%</property>
@@ -3384,7 +3384,7 @@ This report can help you focus on the largest sites that have greater impact on 
                             <row id="513">
                                 <cell id="715">
                                     <label id="719">
-                                        <text-property name="text">Org</text-property>
+                                        <text-property name="text">Organization</text-property>
                                     </label>
                                 </cell>
                                 <cell id="514">
@@ -3407,8 +3407,7 @@ This report can help you focus on the largest sites that have greater impact on 
                                 <cell id="535">
                                     <label id="545">
                                         <property name="textAlign">right</property>
-                                        <text-property name="text">Work&#13;
-Orders</text-property>
+                                        <text-property name="text">Work Orders</text-property>
                                     </label>
                                 </cell>
                                 <cell id="731">
@@ -3420,15 +3419,13 @@ Orders</text-property>
                                 <cell id="727">
                                     <label id="735">
                                         <property name="textAlign">right</property>
-                                        <text-property name="text">Material&#13;
-Trans.</text-property>
+                                        <text-property name="text">Material Trans.</text-property>
                                     </label>
                                 </cell>
                                 <cell id="529">
                                     <label id="736">
                                         <property name="textAlign">right</property>
-                                        <text-property name="text">Service&#13;
-Trans.</text-property>
+                                        <text-property name="text">Service Trans.</text-property>
                                     </label>
                                 </cell>
                                 <cell id="523">
@@ -3513,7 +3510,7 @@ Trans.</text-property>
                 </cell>
             </row>
             <row id="687">
-                <property name="height">0.8020833333333334in</property>
+                <property name="height">0.2in</property>
                 <cell id="688"/>
             </row>
         </grid>
@@ -3529,7 +3526,7 @@ Trans.</text-property>
                 </cell>
             </row>
             <row id="650">
-                <property name="height">0.4in</property>
+                <property name="height">0.2in</property>
                 <cell id="651"/>
             </row>
             <row id="666">
@@ -3664,11 +3661,10 @@ Trans.</text-property>
                 </cell>
             </row>
             <row id="617">
-                <property name="height">0.4in</property>
+                <property name="height">0.2in</property>
                 <cell id="618"/>
             </row>
             <row id="659">
-                <property name="height">0.2in</property>
                 <cell id="660">
                     <property name="textAlign">center</property>
                     <extended-item extensionName="Chart" name="NewChart" id="697">
@@ -4703,6 +4699,19 @@ Trans.</text-property>
                 <property name="height">0.2in</property>
                 <cell id="1225"/>
             </row>
+            <row id="2504">
+                <cell id="2505">
+                    <text id="2506">
+                        <property name="textAlign">justify</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[All database attributes marked as 'userdefined' are listed here. Unfortunately some standard Maximo tables are markes as custom so are included.]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="2502">
+                <property name="height">0.2in</property>
+                <cell id="2503"/>
+            </row>
             <row id="1293">
                 <cell id="1294">
                     <table id="1591">
@@ -4839,7 +4848,7 @@ Trans.</text-property>
                 <cell id="2411">
                     <label id="1557">
                         <property name="style">OmniH1</property>
-                        <text-property name="text">Escalation</text-property>
+                        <text-property name="text">Escalations</text-property>
                     </label>
                 </cell>
             </row>
@@ -4923,10 +4932,8 @@ Trans.</text-property>
                         <column id="1529"/>
                         <column id="1530"/>
                         <column id="1531"/>
+                        <column id="2512"/>
                         <column id="1532"/>
-                        <column id="1534"/>
-                        <column id="2081"/>
-                        <column id="2077"/>
                         <column id="1536"/>
                         <header>
                             <row id="1502">
@@ -4941,6 +4948,11 @@ Trans.</text-property>
                                     </label>
                                 </cell>
                                 <cell id="1505">
+                                    <label id="1548">
+                                        <text-property name="text">Objectname</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="2510">
                                     <label id="1542">
                                         <text-property name="text">Organization</text-property>
                                     </label>
@@ -4948,21 +4960,6 @@ Trans.</text-property>
                                 <cell id="1506">
                                     <label id="1544">
                                         <text-property name="text">Site</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="1508">
-                                    <label id="1548">
-                                        <text-property name="text">Objectname</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="2078">
-                                    <label id="2082">
-                                        <text-property name="text">Cron Tsk</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="2074">
-                                    <label id="2084">
-                                        <text-property name="text">Instance</text-property>
                                     </label>
                                 </cell>
                                 <cell id="1510">
@@ -4987,6 +4984,12 @@ Trans.</text-property>
                                     </data>
                                 </cell>
                                 <cell id="1514">
+                                    <data id="1549">
+                                        <property name="textAlign">left</property>
+                                        <property name="resultSetColumn">objectname</property>
+                                    </data>
+                                </cell>
+                                <cell id="2511">
                                     <data id="1543">
                                         <property name="textAlign">left</property>
                                         <property name="resultSetColumn">orgid</property>
@@ -4996,22 +4999,6 @@ Trans.</text-property>
                                     <data id="1545">
                                         <property name="textAlign">left</property>
                                         <property name="resultSetColumn">siteid</property>
-                                    </data>
-                                </cell>
-                                <cell id="1517">
-                                    <data id="1549">
-                                        <property name="textAlign">left</property>
-                                        <property name="resultSetColumn">objectname</property>
-                                    </data>
-                                </cell>
-                                <cell id="2079">
-                                    <data id="2488">
-                                        <property name="resultSetColumn">crontaskname</property>
-                                    </data>
-                                </cell>
-                                <cell id="2075">
-                                    <data id="2085">
-                                        <property name="resultSetColumn">instancename</property>
                                     </data>
                                 </cell>
                                 <cell id="1519">
@@ -5083,14 +5070,14 @@ Trans.</text-property>
                                 <property name="name">s_size</property>
                                 <text-property name="displayName">s_size</text-property>
                                 <expression name="expression" type="javascript">dataSetRow["s_size"]</expression>
-                                <property name="dataType">string</property>
+                                <property name="dataType">integer</property>
+                                <property name="allowExport">true</property>
                             </structure>
                         </list-property>
                         <property name="pageBreakInterval">0</property>
                         <column id="2455"/>
                         <column id="2456"/>
                         <column id="2458"/>
-                        <column id="2459"/>
                         <column id="2480"/>
                         <column id="2491"/>
                         <header>
@@ -5110,11 +5097,6 @@ Trans.</text-property>
                                         <text-property name="text">Launchpoint</text-property>
                                     </label>
                                 </cell>
-                                <cell id="2442">
-                                    <label id="2476">
-                                        <text-property name="text">Description</text-property>
-                                    </label>
-                                </cell>
                                 <cell id="2478">
                                     <label id="2481">
                                         <text-property name="text">Type</text-property>
@@ -5122,7 +5104,7 @@ Trans.</text-property>
                                 </cell>
                                 <cell id="2489">
                                     <label id="2492">
-                                        <text-property name="text">s_size</text-property>
+                                        <text-property name="text">Size</text-property>
                                     </label>
                                 </cell>
                             </row>
@@ -5144,18 +5126,13 @@ Trans.</text-property>
                                         <property name="resultSetColumn">lp_name</property>
                                     </data>
                                 </cell>
-                                <cell id="2448">
-                                    <data id="2477">
-                                        <property name="resultSetColumn">lp_desc</property>
-                                    </data>
-                                </cell>
                                 <cell id="2479">
                                     <data id="2482">
                                         <property name="resultSetColumn">lp_type</property>
                                     </data>
                                 </cell>
                                 <cell id="2490">
-                                    <data id="2495">
+                                    <data id="2513">
                                         <property name="resultSetColumn">s_size</property>
                                     </data>
                                 </cell>
@@ -5222,15 +5199,20 @@ Trans.</text-property>
                         </list-property>
                         <property name="pageBreakInterval">0</property>
                         <column id="2211"/>
+                        <column id="2516"/>
                         <column id="2212"/>
                         <column id="2213"/>
-                        <column id="2214"/>
                         <column id="2215"/>
                         <header>
                             <row id="2190">
                                 <cell id="2191">
                                     <label id="2218">
                                         <text-property name="text">Process</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="2514">
+                                    <label id="2224">
+                                        <text-property name="text">Process Revision</text-property>
                                     </label>
                                 </cell>
                                 <cell id="2192">
@@ -5241,11 +5223,6 @@ Trans.</text-property>
                                 <cell id="2193">
                                     <label id="2222">
                                         <text-property name="text">Enabled</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="2194">
-                                    <label id="2224">
-                                        <text-property name="text">Process Revision</text-property>
                                     </label>
                                 </cell>
                                 <cell id="2195">
@@ -5262,6 +5239,11 @@ Trans.</text-property>
                                         <property name="resultSetColumn">processname</property>
                                     </data>
                                 </cell>
+                                <cell id="2515">
+                                    <data id="2225">
+                                        <property name="resultSetColumn">processrev</property>
+                                    </data>
+                                </cell>
                                 <cell id="2199">
                                     <data id="2221">
                                         <property name="resultSetColumn">objectname</property>
@@ -5270,11 +5252,6 @@ Trans.</text-property>
                                 <cell id="2200">
                                     <data id="2223">
                                         <property name="resultSetColumn">enabled</property>
-                                    </data>
-                                </cell>
-                                <cell id="2201">
-                                    <data id="2225">
-                                        <property name="resultSetColumn">processrev</property>
                                     </data>
                                 </cell>
                                 <cell id="2202">
@@ -5483,27 +5460,27 @@ Trans.</text-property>
                             <row id="1770">
                                 <cell id="1771">
                                     <label id="1801">
-                                        <text-property name="text">objectname</text-property>
+                                        <text-property name="text">Object Name</text-property>
                                     </label>
                                 </cell>
                                 <cell id="1772">
                                     <label id="1793">
-                                        <text-property name="text">classname</text-property>
+                                        <text-property name="text">Class Name</text-property>
                                     </label>
                                 </cell>
                                 <cell id="1773">
                                     <label id="1795">
-                                        <text-property name="text">description</text-property>
+                                        <text-property name="text">Description</text-property>
                                     </label>
                                 </cell>
                                 <cell id="1774">
                                     <label id="1797">
-                                        <text-property name="text">servicename</text-property>
+                                        <text-property name="text">Service Name</text-property>
                                     </label>
                                 </cell>
                                 <cell id="1775">
                                     <label id="1799">
-                                        <text-property name="text">siteorgtype</text-property>
+                                        <text-property name="text">Site/Org Type</text-property>
                                     </label>
                                 </cell>
                             </row>
@@ -5616,22 +5593,22 @@ Trans.</text-property>
                                 </cell>
                                 <cell id="1863">
                                     <label id="1890">
-                                        <text-property name="text">attributename</text-property>
+                                        <text-property name="text">Attribute Name</text-property>
                                     </label>
                                 </cell>
                                 <cell id="1865">
                                     <label id="1894">
-                                        <text-property name="text">classname</text-property>
+                                        <text-property name="text">Class Name</text-property>
                                     </label>
                                 </cell>
                                 <cell id="1866">
                                     <label id="1896">
-                                        <text-property name="text">columnname</text-property>
+                                        <text-property name="text">Column Name</text-property>
                                     </label>
                                 </cell>
                                 <cell id="1867">
                                     <label id="1898">
-                                        <text-property name="text">domainid</text-property>
+                                        <text-property name="text">Domain</text-property>
                                     </label>
                                 </cell>
                             </row>
@@ -5825,7 +5802,7 @@ Trans.</text-property>
                 <cell id="866">
                     <label id="867">
                         <property name="style">OmniH1</property>
-                        <text-property name="text">Crontasks</text-property>
+                        <text-property name="text">Cron Tasks</text-property>
                     </label>
                 </cell>
             </row>
@@ -6167,7 +6144,7 @@ Trans.</text-property>
             </row>
         </grid>
         <grid id="2019">
-            <property name="pageBreakBefore">always</property>
+            <property name="pageBreakBefore">auto</property>
             <column id="2020"/>
             <row id="2021">
                 <cell id="2022">
@@ -6184,8 +6161,7 @@ Trans.</text-property>
                 <cell id="2049">
                     <text id="2050">
                         <property name="contentType">auto</property>
-                        <text-property name="content"><![CDATA[Thi report helps understanding how Start Centers are associated to Security Groups and how many users
-have access to each of them.]]></text-property>
+                        <text-property name="content"><![CDATA[This report helps understanding how Start Centers are associated to Security Groups and how many users have access to each of them.]]></text-property>
                     </text>
                 </cell>
             </row>
@@ -6281,6 +6257,7 @@ have access to each of them.]]></text-property>
             </row>
         </grid>
         <grid id="2228">
+            <property name="pageBreakBefore">always</property>
             <column id="2229"/>
             <row id="2230">
                 <cell id="2231">
@@ -6532,13 +6509,11 @@ have access to each of them.]]></text-property>
                             </structure>
                         </list-property>
                         <property name="pageBreakInterval">0</property>
-                        <column id="1442">
-                            <property name="width">2.2in</property>
+                        <column id="1442"/>
+                        <column id="2062"/>
+                        <column id="1443">
+                            <property name="width">1in</property>
                         </column>
-                        <column id="2062">
-                            <property name="width">2in</property>
-                        </column>
-                        <column id="1443"/>
                         <header>
                             <row id="1423">
                                 <cell id="1425">

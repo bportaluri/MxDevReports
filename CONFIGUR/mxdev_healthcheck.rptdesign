@@ -1787,7 +1787,6 @@ return (true);
                 <cell id="988"/>
             </row>
             <row id="1126">
-                <property name="height">0.1in</property>
                 <cell id="1127">
                     <label id="1128">
                         <property name="fontSize">14pt</property>
@@ -1815,9 +1814,9 @@ return (true);
                 <property name="height">0.4in</property>
                 <cell id="1309"/>
             </row>
-            <row id="1217">
-                <property name="height">0.4in</property>
-                <cell id="1218">
+            <row id="983">
+                <property name="height">4.6in</property>
+                <cell id="984">
                     <label id="1207">
                         <property name="fontSize">9pt</property>
                         <property name="fontWeight">bold</property>
@@ -1831,10 +1830,6 @@ return (true);
                         <text-property name="text">Please generate this report in PDF format for best results.</text-property>
                     </label>
                 </cell>
-            </row>
-            <row id="983">
-                <property name="height">4.6in</property>
-                <cell id="984"/>
             </row>
             <row id="976">
                 <cell id="977">
@@ -2309,6 +2304,7 @@ this.content = sdf.format( today );
                 </cell>
             </row>
             <row id="1186">
+                <property name="height">0.2in</property>
                 <cell id="1187"/>
             </row>
         </grid>
@@ -2551,7 +2547,7 @@ Trans.</text-property>
                 </cell>
             </row>
             <row id="687">
-                <property name="height">0.3in</property>
+                <property name="height">0.2in</property>
                 <cell id="688"/>
             </row>
         </grid>
@@ -2582,7 +2578,7 @@ This report lists the 20 largest tables in your Maximo database to help you pinp
                 </cell>
             </row>
             <row id="650">
-                <property name="height">0.4in</property>
+                <property name="height">0.2in</property>
                 <cell id="651"/>
             </row>
             <row id="666">
@@ -2717,7 +2713,7 @@ This report lists the 20 largest tables in your Maximo database to help you pinp
                 </cell>
             </row>
             <row id="617">
-                <property name="height">0.4in</property>
+                <property name="height">0.2in</property>
                 <cell id="618"/>
             </row>
             <row id="659">
@@ -3661,7 +3657,7 @@ By projecting these figures in the next few years, it is possible to forecast pe
                 </cell>
             </row>
             <row id="641">
-                <property name="height">0.4in</property>
+                <property name="height">0.2in</property>
                 <cell id="642"/>
             </row>
             <row id="597">
@@ -3835,7 +3831,7 @@ Instances</text-property>
                 </cell>
             </row>
             <row id="607">
-                <property name="height">0.4in</property>
+                <property name="height">0.2in</property>
                 <cell id="608"/>
             </row>
             <row id="601">
@@ -6437,7 +6433,7 @@ The third report the cumulative execution duration throughout the day.<BR>
                 </cell>
             </row>
             <row id="752">
-                <property name="height">0.4in</property>
+                <property name="height">0.2in</property>
                 <cell id="753"/>
             </row>
             <row id="754">
@@ -6562,7 +6558,7 @@ The third report the cumulative execution duration throughout the day.<BR>
                 </cell>
             </row>
             <row id="796">
-                <property name="height">0.4in</property>
+                <property name="height">0.2in</property>
                 <cell id="797"/>
             </row>
             <row id="809">
@@ -6691,7 +6687,7 @@ duration (s)</text-property>
                 </cell>
             </row>
             <row id="811">
-                <property name="height">0.4in</property>
+                <property name="height">0.2in</property>
                 <cell id="812"/>
             </row>
             <row id="798">
@@ -7855,7 +7851,7 @@ The third report the cumulative execution duration throughout the day.<BR>
                 </cell>
             </row>
             <row id="873">
-                <property name="height">0.4in</property>
+                <property name="height">0.2in</property>
                 <cell id="874"/>
             </row>
             <row id="875">
@@ -7984,7 +7980,7 @@ The third report the cumulative execution duration throughout the day.<BR>
                 </cell>
             </row>
             <row id="911">
-                <property name="height">0.4in</property>
+                <property name="height">0.2in</property>
                 <cell id="912"/>
             </row>
             <row id="913">
@@ -8062,7 +8058,7 @@ duration (s)</text-property>
                                 <cell id="1316">
                                     <label id="1114">
                                         <property name="textAlign">right</property>
-                                        <text-property name="text">Num run</text-property>
+                                        <text-property name="text">Runs</text-property>
                                     </label>
                                 </cell>
                                 <cell id="1086">
@@ -8117,7 +8113,7 @@ duration (s)</text-property>
                 </cell>
             </row>
             <row id="949">
-                <property name="height">0.4in</property>
+                <property name="height">0.2in</property>
                 <cell id="950"/>
             </row>
             <row id="951">
@@ -9279,7 +9275,7 @@ You should configure heavy batch tasks (see the crontask and escalations section
                 </cell>
             </row>
             <row id="1293">
-                <property name="height">0.4in</property>
+                <property name="height">0.2in</property>
                 <cell id="1294"/>
             </row>
             <row id="1295">

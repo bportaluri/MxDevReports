@@ -477,13 +477,13 @@ ds3 = MXReportDataSetProvider.create(this.getDataSource().getName(), this.getNam
 
 scriptLogger.debug(">>> fNames: " + fNames);
 
-cols = "eaudittransid, eaudittimestamp, eauditusername, eaudittype, esigtransid, lt.reason esigtransmemo, " + rows[0]["uniquecol"] + ", ";
+cols = "t.eaudittransid, t.eaudittimestamp, t.eauditusername, t.eaudittype, t.esigtransid, lt.reason esigtransmemo, t." + rows[0]["uniquecol"];
 
-for (i=0; i<fNames.length-1; i++)
+for (i=0; i<fNames.length; i++)
 {
-	cols = cols + fNames[i] + ", ";
+	cols = cols + ", t." + fNames[i];
 }
-cols = cols + fNames[fNames.length-1];
+//cols = cols + fNames[fNames.length-1];
 
 scriptLogger.debug(">>> cols: " + cols);
 
@@ -503,11 +503,12 @@ if(params["lookbackdays"])
 }
 
 
-var sqlText = "select " + cols +
+var sqlText =
+ "select " + cols +
 " from " + rows[0]["eaudittbname"] + " t" +
 " left outer join logintracking lt on lt.transid=t.esigtransid " +
-" where eaudittimestamp between " + startdate0 + " and " + enddate + 
-" order by " + rows[0]["uniquecol"] + ", eaudittimestamp ";
+" where t.eaudittimestamp between " + startdate0 + " and " + enddate + 
+" order by t." + rows[0]["uniquecol"] + ", t.eaudittimestamp ";
 
 scriptLogger.debug(">>> sqlText: " + sqlText);
 
@@ -554,7 +555,7 @@ for (i=0; i<fNames.length; i++)
 	fValues[i] = x;
 }
 
-row["xxx"]  = chg;
+row["xxx"] = chg;
 
 // note that records are filtered in the table for selected time and user
 
@@ -674,7 +675,7 @@ return (true);
                         <property name="fontSize">14pt</property>
                         <property name="fontWeight">bold</property>
                         <property name="color">#006464</property>
-                        <text-property name="text">Version 1.1</text-property>
+                        <text-property name="text">Version 1.2</text-property>
                     </label>
                 </cell>
             </row>
@@ -709,7 +710,6 @@ return (true);
                 <cell id="3015"/>
             </row>
             <row id="2987">
-                <property name="height">1in</property>
                 <cell id="2988">
                     <grid id="2989">
                         <column id="2990">
@@ -796,7 +796,7 @@ return (true);
                 </cell>
             </row>
             <row id="983">
-                <property name="height">3in</property>
+                <property name="height">2.5in</property>
                 <cell id="984"/>
             </row>
             <row id="976">
@@ -812,7 +812,7 @@ return (true);
             </row>
         </grid>
         <table id="7">
-            <property name="pageBreakBefore">auto</property>
+            <property name="pageBreakBefore">always</property>
             <property name="width">100%</property>
             <property name="dataSet">ds1</property>
             <list-property name="boundDataColumns">
