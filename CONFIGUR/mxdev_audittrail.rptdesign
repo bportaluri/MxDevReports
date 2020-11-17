@@ -135,6 +135,22 @@ var prevId=0;
                 <property name="category">Unformatted</property>
             </structure>
         </scalar-parameter>
+        <scalar-parameter name="updatesonly" id="3027">
+            <text-property name="promptText">Updates Only?</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">N</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">></property>
+                <property name="pattern">></property>
+            </structure>
+        </scalar-parameter>
     </parameters>
     <data-sources>
         <script-data-source name="maximoDataSource" id="64"/>
@@ -390,21 +406,26 @@ return (true);]]></method>
                 </structure>
                 <structure>
                     <property name="position">4</property>
-                    <property name="name">key</property>
+                    <property name="name">type</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
                     <property name="position">5</property>
-                    <property name="name">esigtransid</property>
+                    <property name="name">key</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
                     <property name="position">6</property>
-                    <property name="name">esigtransmemo</property>
+                    <property name="name">esigtransid</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
                     <property name="position">7</property>
+                    <property name="name">esigtransmemo</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
                     <property name="name">xxx</property>
                     <property name="dataType">string</property>
                 </structure>
@@ -418,6 +439,9 @@ return (true);]]></method>
                 </structure>
                 <structure>
                     <property name="columnName">uniqueid</property>
+                </structure>
+                <structure>
+                    <property name="columnName">type</property>
                 </structure>
                 <structure>
                     <property name="columnName">key</property>
@@ -451,21 +475,26 @@ return (true);]]></method>
                     </structure>
                     <structure>
                         <property name="position">4</property>
-                        <property name="name">key</property>
+                        <property name="name">type</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">5</property>
-                        <property name="name">esigtransid</property>
+                        <property name="name">key</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">6</property>
-                        <property name="name">esigtransmemo</property>
+                        <property name="name">esigtransid</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">7</property>
+                        <property name="name">esigtransmemo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
                         <property name="name">xxx</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -475,7 +504,7 @@ return (true);]]></method>
             <method name="open"><![CDATA[ 
 ds3 = MXReportDataSetProvider.create(this.getDataSource().getName(), this.getName());
 
-scriptLogger.debug(">>> fNames: " + fNames);
+//scriptLogger.debug(">>> fNames: " + fNames);
 
 cols = "t.eaudittransid, t.eaudittimestamp, t.eauditusername, t.eaudittype, t.esigtransid, lt.reason esigtransmemo, t." + rows[0]["uniquecol"];
 
@@ -485,7 +514,7 @@ for (i=0; i<fNames.length; i++)
 }
 //cols = cols + fNames[fNames.length-1];
 
-scriptLogger.debug(">>> cols: " + cols);
+//scriptLogger.debug(">>> cols: " + cols);
 
 //scriptLogger.debug(">>> column names: " + cols);
 
@@ -502,12 +531,18 @@ if(params["lookbackdays"])
 	scriptLogger.debug(">>> startdate0: " + startdate0);
 }
 
+var whereclause = "t.eaudittimestamp between " + startdate0 + " and " + enddate;
+
+if(params["updatesonly"]=="Y")
+{
+	whereclause = whereclause + " and eaudittype='U'";
+}
 
 var sqlText =
  "select " + cols +
 " from " + rows[0]["eaudittbname"] + " t" +
 " left outer join logintracking lt on lt.transid=t.esigtransid " +
-" where t.eaudittimestamp between " + startdate0 + " and " + enddate + 
+" where " + whereclause + 
 " order by t." + rows[0]["uniquecol"] + ", t.eaudittimestamp ";
 
 scriptLogger.debug(">>> sqlText: " + sqlText);
@@ -520,11 +555,13 @@ ds3.setQuery(sqlText);
 if (!ds3.fetch()) 
   return (false);
 
-row["uniqueid"]  = ds3.getInteger(rows[0]["uniquecol"]);
-row["timestamp"] = ds3.getTimestamp("eaudittimestamp");
-row["username"]  = ds3.getString("eauditusername");
-row["esigtransid"]  = ds3.getString("esigtransid");
-row["esigtransmemo"]  = ds3.getString("esigtransmemo");
+row["uniqueid"]      = ds3.getInteger(rows[0]["uniquecol"]);
+
+row["timestamp"]     = ds3.getTimestamp("eaudittimestamp");
+row["type"]          = ds3.getString("eaudittype");
+row["username"]      = ds3.getString("eauditusername");
+row["esigtransid"]   = ds3.getString("esigtransid");
+row["esigtransmemo"] = ds3.getString("esigtransmemo");
 
 // concatenate primary columns into the 'key' attribute
 row["key"]="";
@@ -549,7 +586,7 @@ for (i=0; i<fNames.length; i++)
 	//scriptLogger.debug(">>> curr:" + fNames[i] + "=" + x);
 	if (fValues[i]!=x)
 	{
-		chg += fNames[i] + ": " + fValues[i] + " > " + x;
+		chg += fDescs[i] + " (" +fNames[i] + "): " + fValues[i] + " > " + x;
 		chg += "\n";
 	}
 	fValues[i] = x;
@@ -560,7 +597,6 @@ row["xxx"] = chg;
 // note that records are filtered in the table for selected time and user
 
 return (true);
-
 ]]></method>
         </script-data-set>
     </data-sets>
@@ -675,7 +711,7 @@ return (true);
                         <property name="fontSize">14pt</property>
                         <property name="fontWeight">bold</property>
                         <property name="color">#006464</property>
-                        <text-property name="text">Version 1.2</text-property>
+                        <text-property name="text">Version 1.3</text-property>
                     </label>
                 </cell>
             </row>
@@ -1111,11 +1147,21 @@ return (true);
                                     <expression name="expression" type="javascript">dataSetRow["key"]</expression>
                                     <property name="dataType">string</property>
                                 </structure>
+                                <structure>
+                                    <property name="name">type</property>
+                                    <text-property name="displayName">type</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["type"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
                             </list-property>
                             <list-property name="filter">
                                 <structure>
                                     <property name="operator">is-true</property>
                                     <expression name="expr" type="javascript">(params["username"].value==null) || params["username"].value.equals("") || row["username"].equals(String.toUpperCase(params["username"].value))</expression>
+                                </structure>
+                                <structure>
+                                    <property name="operator">is-true</property>
+                                    <expression name="expr" type="javascript">BirtDateTime.diffDay(row["timestamp"], params["startdate"])&lt;=0</expression>
                                 </structure>
                             </list-property>
                             <column id="2943">
@@ -1125,6 +1171,9 @@ return (true);
                                 <property name="width">1.5in</property>
                             </column>
                             <column id="2978">
+                                <property name="width">0.6in</property>
+                            </column>
+                            <column id="3030">
                                 <property name="width">0.6in</property>
                             </column>
                             <column id="2975">
@@ -1150,6 +1199,11 @@ return (true);
                                         </label>
                                     </cell>
                                     <cell id="2976">
+                                        <label id="3031">
+                                            <text-property name="text">Type</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="3028">
                                         <label id="2981">
                                             <text-property name="text">eSig Trans.</text-property>
                                         </label>
@@ -1193,6 +1247,11 @@ return (true);
                                         </data>
                                     </cell>
                                     <cell id="2977">
+                                        <data id="3032">
+                                            <property name="resultSetColumn">type</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="3029">
                                         <data id="2982">
                                             <property name="resultSetColumn">esigtransid</property>
                                         </data>
