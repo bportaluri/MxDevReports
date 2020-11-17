@@ -17,6 +17,10 @@ See the [MxDev Reports page](https://bportaluri.com/mxdev-maximo-reports) for mo
 
 ### mxdev_audittrail
 
+#### Version 1.3 (2020-11-17)
+- Added 'Only Updates' parameter
+- Added filter to hide rows not within the selected time window
+
 #### Version 1.2 (2019-11-10)
-- page breaks for each object
+- Page breaks for each object
 - Fixed 'column ambiguosly defined' error
