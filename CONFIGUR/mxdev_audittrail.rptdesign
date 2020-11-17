@@ -809,6 +809,25 @@ return (true);
                                 </data>
                             </cell>
                         </row>
+                        <row id="3033">
+                            <cell id="3034">
+                                <label id="3037">
+                                    <text-property name="text">Updates Only?:</text-property>
+                                </label>
+                            </cell>
+                            <cell id="3035">
+                                <data id="3036">
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">updatesonly</property>
+                                            <expression name="expression" type="javascript">params["updatesonly"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">updatesonly</property>
+                                </data>
+                            </cell>
+                        </row>
                         <row id="3001">
                             <cell id="3002">
                                 <label id="3013">
