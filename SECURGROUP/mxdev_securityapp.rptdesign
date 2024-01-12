@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.22" id="1">
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
     <property name="author">Bruno Portaluri (MaximoDev)</property>
     <property name="comments">MIT License
 
@@ -22,7 +22,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.</property>
-    <property name="createdBy">Eclipse BIRT Designer Version 3.7.1.v20110905 Build &lt;3.7.1.v20110913-1734></property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.3.1.v201309091055 Build &lt;4.3.1.v20130917-1035></property>
     <text-property name="title">Maximo Application Security Overview</text-property>
     <list-property name="userProperties">
         <structure>
@@ -367,7 +367,7 @@ sql =
 +" (SELECT COUNT(*) FROM applicationauth WHERE groupname=maxgroup.groupname AND app=maxapps.app) appaccessall"
 + " from maxapps, maxgroup"
 + " where (SELECT COUNT(*) FROM applicationauth WHERE groupname=maxgroup.groupname AND app=maxapps.app AND optionname in ('READ', 'SAVE'))>0"
-+ " and maxgroup.groupname not in ('MAXADMIN', 'ENI-ADMIN')"
++ " and " + params["where"]
 + " ORDER BY maxapps.app, maxgroup.description";
 
 
@@ -760,7 +760,7 @@ return (true);]]></method>
                         <property name="fontSize">14pt</property>
                         <property name="fontWeight">bold</property>
                         <property name="color">#006464</property>
-                        <text-property name="text">Version 1.2</text-property>
+                        <text-property name="text">Version 1.3</text-property>
                     </label>
                 </cell>
             </row>
@@ -1299,7 +1299,7 @@ If the number of selected applications is too large the table may not be display
             </row>
             <row id="1314">
                 <cell id="1315">
-                    <extended-item extensionName="Crosstab" extensionVersion="2.5.0" id="1558">
+                    <extended-item extensionName="Crosstab" extensionVersion="3.7.0" id="1558">
                         <property name="cube">dc</property>
                         <property name="measures">
                             <extended-item extensionName="MeasureView" id="1572">
@@ -1667,7 +1667,7 @@ If the number of selected applications is too large the table may not be display
                 ZLZIAACwCodNMhs+ZxoA/oD2i2d3JqwkAABIOEkSvr5yTm6WM/y9Zg/TNGPb3saEVQUAAAmnyOKXvzjD
                 7F4cAwAA4JTpHoBNER+8wzQ3AAAg9YkizUgzPd0aZwIDAHAKXUAAAJxCAAAAcAoBAADAKQQAAACnEAAA
                 AJxCAAAAcAoBAADAqf8P1Tisuyg/7SgAAAAASUVORK5CYII=
-            </property>
+</property>
         </structure>
     </list-property>
 </report>
