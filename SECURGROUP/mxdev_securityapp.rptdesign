@@ -363,7 +363,7 @@ sql =
 +" maxapps.description,"
 +" maxgroup.groupname,"
 +" maxgroup.description grp_desc,"
-+" (SELECT COUNT(*) FROM applicationauth WHERE groupname=maxgroup.groupname AND app=maxapps.app AND optionname in ('READ', 'SAVE')) appaccess,"
++" (SELECT COUNT(*) FROM applicationauth WHERE groupname=maxgroup.groupname AND app=maxapps.app AND optionname in ('READ', 'SAVE', 'INSERT')) appaccess,"
 +" (SELECT COUNT(*) FROM applicationauth WHERE groupname=maxgroup.groupname AND app=maxapps.app) appaccessall"
 + " from maxapps, maxgroup"
 + " where (SELECT COUNT(*) FROM applicationauth WHERE groupname=maxgroup.groupname AND app=maxapps.app AND optionname in ('READ', 'SAVE'))>0"
@@ -599,6 +599,10 @@ return (true);]]></method>
                                     <property name="dataType">string</property>
                                     <property name="columnName">groupname</property>
                                 </tabular-level>
+                                <tabular-level name="grp_desc" id="1588">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">grp_desc</property>
+                                </tabular-level>
                             </property>
                         </tabular-hierarchy>
                     </property>
@@ -760,7 +764,7 @@ return (true);]]></method>
                         <property name="fontSize">14pt</property>
                         <property name="fontWeight">bold</property>
                         <property name="color">#006464</property>
-                        <text-property name="text">Version 1.3</text-property>
+                        <text-property name="text">Version 1.4</text-property>
                     </label>
                 </cell>
             </row>
@@ -1307,7 +1311,7 @@ If the number of selected applications is too large the table may not be display
                                 <property name="detail">
                                     <extended-item extensionName="AggregationCell" id="1573">
                                         <property name="aggregationOnRow">app/description</property>
-                                        <property name="aggregationOnColumn">Group/groupname</property>
+                                        <property name="aggregationOnColumn">Group/grp_desc</property>
                                         <property name="borderTopStyle">solid</property>
                                         <property name="borderTopWidth">thin</property>
                                         <property name="borderTopColor">#C0C0C0</property>
@@ -1336,7 +1340,16 @@ If the number of selected applications is too large the table may not be display
                                                 <simple-property-list name="value1">
                                                     <value type="javascript">2</value>
                                                 </simple-property-list>
-                                                <property name="backgroundColor">#FF8080</property>
+                                                <property name="backgroundColor">#FF8040</property>
+                                                <property name="fontSize">10pt</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="operator">eq</property>
+                                                <expression name="testExpr" type="javascript">measure["appaccess"]</expression>
+                                                <simple-property-list name="value1">
+                                                    <value type="javascript">3</value>
+                                                </simple-property-list>
+                                                <property name="backgroundColor">#FF0000</property>
                                                 <property name="fontSize">10pt</property>
                                             </structure>
                                         </list-property>
@@ -1344,7 +1357,7 @@ If the number of selected applications is too large the table may not be display
                                             <data id="1574">
                                                 <property name="fontSize">7pt</property>
                                                 <property name="textAlign">center</property>
-                                                <property name="resultSetColumn">appaccess_app/description_Group/groupname</property>
+                                                <property name="resultSetColumn">appaccessall_app/description_Group/grp_desc</property>
                                             </data>
                                         </property>
                                     </extended-item>
@@ -1437,6 +1450,25 @@ If the number of selected applications is too large the table may not be display
                                                     </extended-item>
                                                 </property>
                                             </extended-item>
+                                            <extended-item extensionName="LevelView" name="NewLevel View3" id="1589">
+                                                <property name="level">Group/grp_desc</property>
+                                                <property name="member">
+                                                    <extended-item extensionName="CrosstabCell" id="1590">
+                                                        <property name="content">
+                                                            <data name="grp_desc" id="1591">
+                                                                <property name="resultSetColumn">grp_desc</property>
+                                                            </data>
+                                                        </property>
+                                                        <property name="fontWeight">normal</property>
+                                                        <property name="borderLeftStyle">solid</property>
+                                                        <property name="borderLeftWidth">thin</property>
+                                                        <property name="borderLeftColor">#C0C0C0</property>
+                                                        <property name="borderRightStyle">solid</property>
+                                                        <property name="borderRightWidth">thin</property>
+                                                        <property name="borderRightColor">#C0C0C0</property>
+                                                    </extended-item>
+                                                </property>
+                                            </extended-item>
                                         </property>
                                     </extended-item>
                                 </property>
@@ -1484,6 +1516,21 @@ If the number of selected applications is too large the table may not be display
                                         <expression name="value" type="javascript">measure["appaccessall"]</expression>
                                     </structure>
                                 </list-property>
+                            </structure>
+                            <structure>
+                                <property name="name">grp_desc</property>
+                                <expression name="expression">dimension["Group"]["grp_desc"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">appaccessall_app/description_Group/grp_desc</property>
+                                <expression name="expression">measure["appaccessall"]</expression>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>app/description</value>
+                                    <value>Group/grp_desc</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
                             </structure>
                         </list-property>
                     </extended-item>
