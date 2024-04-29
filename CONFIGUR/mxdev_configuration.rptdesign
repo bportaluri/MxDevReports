@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.22" id="1">
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
     <property name="author">Developed by Bruno Portaluri</property>
     <property name="comments">MIT License
 
@@ -22,7 +22,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.</property>
-    <property name="createdBy">Eclipse BIRT Designer Version 3.7.1.v20110905 Build &lt;3.7.1.v20110913-1734></property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.3.1.v201309091055 Build &lt;4.3.1.v20130917-1035></property>
     <text-property name="title">Maximo Configuration Overview</text-property>
     <property name="units">in</property>
     <method name="initialize"><![CDATA[
@@ -2711,9 +2711,9 @@ return (true);
         <simple-master-page name="A4MaximoPortrait" id="343">
             <property name="type">a4</property>
             <property name="topMargin">0.75in</property>
-            <property name="leftMargin">0.75in</property>
+            <property name="leftMargin">0.5in</property>
             <property name="bottomMargin">0.5in</property>
-            <property name="rightMargin">0.75in</property>
+            <property name="rightMargin">0.5in</property>
             <property name="showHeaderOnFirst">true</property>
             <property name="showFooterOnLast">true</property>
             <property name="headerHeight">0.2in</property>
@@ -2795,7 +2795,7 @@ return (true);
                         <property name="fontSize">14pt</property>
                         <property name="fontWeight">bold</property>
                         <property name="color">#006464</property>
-                        <text-property name="text">Version 1.4</text-property>
+                        <text-property name="text">Version 1.5</text-property>
                     </label>
                 </cell>
             </row>
@@ -4545,9 +4545,9 @@ This report can help you focus on the largest sites that have greater impact on 
                         <property name="inheritColumns">true</property>
                         <property name="marginTop">0px</property>
                         <property name="marginLeft">0px</property>
-                        <property name="dataSet">dsObj</property>
                         <property name="height">3.1in</property>
                         <property name="width">6.5in</property>
+                        <property name="dataSet">dsObj</property>
                         <list-property name="boundDataColumns">
                             <structure>
                                 <property name="name">tbname</property>
@@ -6742,7 +6742,7 @@ This report can help you focus on the largest sites that have greater impact on 
                 ZLZIAACwCodNMhs+ZxoA/oD2i2d3JqwkAABIOEkSvr5yTm6WM/y9Zg/TNGPb3saEVQUAAAmnyOKXvzjD
                 7F4cAwAA4JTpHoBNER+8wzQ3AAAg9YkizUgzPd0aZwIDAHAKXUAAAJxCAAAAcAoBAADAKQQAAACnEAAA
                 AJxCAAAAcAoBAADAqf8P1Tisuyg/7SgAAAAASUVORK5CYII=
-            </property>
+</property>
         </structure>
     </list-property>
 </report>
